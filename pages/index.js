@@ -6,6 +6,7 @@ import axios from "axios";
 import axiosInstance from "../util/axios";
 
 export default function Home({ pizzaList }) {
+  console.log(process.env.MONGO_URL);
   return (
     <div>
       <Head>
@@ -21,8 +22,8 @@ export default function Home({ pizzaList }) {
 
 export const getServerSideProps = async () => {
   const res = await axiosInstance.get("products");
-  // const res = await axios.get("http://localhost:3000/api/products");
-  console.log(res);
+  // const res = await axios.get("/api/products");
+  // console.log(res);
   return {
     props: {
       pizzaList: res.data,

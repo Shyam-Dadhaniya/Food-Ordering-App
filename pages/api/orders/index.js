@@ -3,7 +3,7 @@ import Order from "../../../models/Order";
 
 const handler = async (req, res) => {
   const { method } = req;
-    console.log(method)
+    // console.log(method)
   await dbConnect();
 
   if (method === "GET") {
@@ -15,7 +15,7 @@ const handler = async (req, res) => {
     }
   }
   if (method === "POST") {
-    console.log(req.body)
+    // console.log(req.body)
     try {
       const order = await Order.create(req.body);
      return  res.status(201).json(order);

@@ -3,10 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: {
-    URL:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/api/"
-        : "https://main--food-delivery-application.netlify.app/api/",
+    MONGO_URL:"mongodb+srv://foodOrderingApp:foodapp@cluster0.wms7sch.mongodb.net/pizza?retryWrites=true&w=majority",
   },
 };
 

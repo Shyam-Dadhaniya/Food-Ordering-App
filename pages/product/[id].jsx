@@ -12,9 +12,9 @@ const Product = ({ pizza }) => {
   const [extra, setExtra] = useState([]);
   const dispatch = useDispatch();
   const changePrice = (number) => {
-    console.log(price);
+    // console.log(price);
     setPrice(price + number);
-    console.log(price);
+    // console.log(price);
   };
   const handleSize = (sizeIndex) => {
     const difference = pizza.price[sizeIndex] - pizza.price[size];
@@ -23,7 +23,7 @@ const Product = ({ pizza }) => {
   };
   const handleChange = (e, option) => {
     const checked = e.target.checked;
-    console.log(checked);
+    // console.log(checked);
 
     if (checked) {
       changePrice(option.price);
@@ -98,10 +98,10 @@ const Product = ({ pizza }) => {
 export default Product;
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axiosInstance.get(`products/${params.id}`);
-  // const res = await axios.get(
-  //   `http://localhost:3000/api/products/${params.id}`
-  // );
+  // const res = await axiosInstance.get(`products/${params.id}`);
+  const res = await axios.get(
+    `/api/products/${params.id}`
+  );
   return {
     props: {
       pizza: res.data,
