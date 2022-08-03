@@ -10,7 +10,6 @@ const Featured = () => {
   ];
 
   const handleArrow = (direction) => {
-    console.log(index);
     if (direction === "l") {
       setIndex(index !== 0 ? index - 1 : 2);
     }
