@@ -6,7 +6,7 @@ const nextConfig = {
     URL:
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/api/"
-        : "live url",
+        : "https://main--food-delivery-application.netlify.app/api/",
   },
 };
 
