@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
+import axiosInstance from "../../util/axios";
 const Product = ({ pizza }) => {
   const [price, setPrice] = useState(pizza.price[0]);
   const [size, setSize] = useState(0);
@@ -32,11 +33,10 @@ const Product = ({ pizza }) => {
       setExtra(extra.filter((item) => item.id !== option.id));
     }
   };
-  const handleClick =()=>{
-    dispatch(addProduct({...pizza, price, quantity, extra}));
-  }
+  const handleClick = () => {
+    dispatch(addProduct({ ...pizza, price, quantity, extra }));
+  };
   return (
-
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.imgContainer}>
@@ -86,7 +86,9 @@ const Product = ({ pizza }) => {
             defaultValue={1}
             className={styles.quantity}
           />
-          <button className={styles.button} onClick={handleClick}>Add to Cart</button>
+          <button className={styles.button} onClick={handleClick}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
@@ -96,9 +98,10 @@ const Product = ({ pizza }) => {
 export default Product;
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(
-    `http://localhost:3000/api/products/${params.id}`
-  );
+  const res = await axiosInstance.get(`products/${params.id}`);
+  // const res = await axios.get(
+  //   `http://localhost:3000/api/products/${params.id}`
+  // );
   return {
     props: {
       pizza: res.data,
