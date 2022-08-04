@@ -75,7 +75,7 @@ const Cart = () => {
                 // );
                 // res.status === 201 && router.push("/orders/" + res.data._id);
                 // dispatch(reset());
-                console.log(orderId);
+                // console.log(orderId);
                 return orderId;
               })
               .catch((err) => {});

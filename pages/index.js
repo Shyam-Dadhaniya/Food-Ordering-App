@@ -6,7 +6,7 @@ import axios from "axios";
 import axiosInstance from "../util/axios";
 
 export default function Home({ pizzaList }) {
-  console.log(process.env.MONGO_URL);
+  // console.log(process.env.MONGO_URL);
   return (
     <div>
       <Head>
