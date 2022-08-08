@@ -5,7 +5,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
 import axiosInstance from "../../util/axios";
+import { useToasts } from "react-toast-notifications";
+
 const Product = ({ pizza }) => {
+  const { addToast } = useToasts();
   const [price, setPrice] = useState(pizza.price[0]);
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -35,6 +38,9 @@ const Product = ({ pizza }) => {
   };
   const handleClick = () => {
     dispatch(addProduct({ ...pizza, price, quantity, extra }));
+    addToast("Product added to cart", {
+      appearance: "success",
+    });
   };
   return (
     <div className={styles.container}>
@@ -83,6 +89,7 @@ const Product = ({ pizza }) => {
           <input
             onChange={(e) => setQuantity(e.target.value)}
             type="number"
+            min={1}
             defaultValue={1}
             className={styles.quantity}
           />

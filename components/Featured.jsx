@@ -6,7 +6,8 @@ const Featured = () => {
   const images = [
     "/img/featured.jpg",
     "/img/featured2.jpg",
-    "/img/featured3.jpg",
+    // "/img/featured3.jpg",
+    "/img/featured5.jpg",
   ];
 
   const handleArrow = (direction) => {
