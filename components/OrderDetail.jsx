@@ -1,11 +1,17 @@
 import styles from "../styles/OrderDetail.module.css";
 import { useState } from "react";
-const OrderDetail = ({total, createOrder }) => {
+import { useToasts } from "react-toast-notifications";
+
+const OrderDetail = ({ total, createOrder }) => {
+  const { addToast } = useToasts();
   const [customer, setCustomer] = useState("");
   const [address, setAddress] = useState("");
   const handleClick = () => {
     createOrder({ customer, address, total, method: 0 });
-  }
+    addToast("Order Placed Successful", {
+      appearance: "success",
+    });
+  };
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

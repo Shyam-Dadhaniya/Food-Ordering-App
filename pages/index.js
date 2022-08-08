@@ -4,9 +4,11 @@ import Featured from "../components/Featured";
 import PizzaList from "../components/PizzaList";
 import axios from "axios";
 import axiosInstance from "../util/axios";
-
-export default function Home({ pizzaList }) {
-  // console.log(process.env.MONGO_URL);
+import AddButton from "../components/AddButton";
+import { useState } from "react";
+import Add from "../components/Add";
+export default function Home({ pizzaList, admin }) {
+  const [close, setClose] = useState(true);
   return (
     <div>
       <Head>
@@ -15,18 +17,26 @@ export default function Home({ pizzaList }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured />
+      {admin && <AddButton setClose={setClose} />}
       <PizzaList pizzaList={pizzaList} />
+      {!close && <Add setClose={setClose} />}
     </div>
   );
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
+  const myCookie = ctx.req?.cookies || "";
+  let admin = false;
+  if (myCookie.token === process.env.TOKEN) {
+    admin = true;
+  }
   const res = await axiosInstance.get("products");
   // const res = await axios.get("/api/products");
   // console.log(res);
   return {
     props: {
       pizzaList: res.data,
+      admin,
     },
   };
 };
