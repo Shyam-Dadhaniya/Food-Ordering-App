@@ -2,6 +2,7 @@ import styles from "../../styles/Cart.module.css";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useToasts } from "react-toast-notifications";
 import {
   PayPalScriptProvider,
   PayPalButtons,
@@ -14,6 +15,8 @@ import OrderDetail from "../../components/OrderDetail";
 import axiosInstance from "../../util/axios";
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const { addToast } = useToasts();
+
   const [open, setOpen] = useState(false);
   const [cash, setCash] = useState(false);
   const amount = cart.total;
@@ -28,7 +31,7 @@ const Cart = () => {
       // const res = await axios.post("http://localhost:3000/api/orders", data);
       const res = await axiosInstance.post("orders", data);
 
-      // console.log(res);
+      console.log(res);
       res.status === 201 && router.push("/orders/" + res.data._id);
       dispatch(reset());
     } catch (err) {
@@ -88,6 +91,9 @@ const Cart = () => {
                 address: shipping.address.address_line_1,
                 total: cart.total,
                 method: 1,
+              });
+              addToast("Order Placed Successful", {
+                appearance: "success",
               });
             });
           }}

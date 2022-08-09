@@ -9,6 +9,7 @@ const handler = async (req, res) => {
   if (method === "GET") {
     try {
       const orders = await Order.find();
+      // console.log(orders)
      return  res.status(200).json(orders);
     } catch (err) {
      return  res.status(500).json(err);
